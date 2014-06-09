@@ -1,5 +1,6 @@
-package io.mikael.convert;
+package io.mikael.convert.basic;
 
+import io.mikael.convert.Converter;
 import org.junit.Test;
 
 public class BasicTests {

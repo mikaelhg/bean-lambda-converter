@@ -8,9 +8,9 @@ import java.util.function.Predicate;
 
 public class FieldGroup<SOURCE, TARGET> extends AbstractFieldTransfer<SOURCE, TARGET> {
 
-    private final List<AbstractFieldTransfer<SOURCE, TARGET>> transfers = new LinkedList<>();
+    protected final List<AbstractFieldTransfer<SOURCE, TARGET>> transfers = new LinkedList<>();
 
-    private final Predicate<SOURCE> predicate;
+    protected final Predicate<SOURCE> predicate;
 
     protected FieldGroup(final Converter<SOURCE, TARGET> converter) {
         this(converter, null);

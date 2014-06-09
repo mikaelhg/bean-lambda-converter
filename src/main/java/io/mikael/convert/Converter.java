@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * The primary public face of the converter prototype.
@@ -46,4 +47,17 @@ public class Converter<SOURCE, TARGET> {
                 .forEach(t -> t.transferData(source, target));
         return target;
     }
+
+    public TARGET convert(final SOURCE source, final Supplier<TARGET> targetSupplier) {
+        return convert(source, targetSupplier.get());
+    }
+
+    public TARGET convert(final Supplier<SOURCE> sourceSupplier, final TARGET target) {
+        return convert(sourceSupplier.get(), target);
+    }
+
+    public TARGET convert(final Supplier<SOURCE> sourceSupplier, final Supplier<TARGET> targetSupplier) {
+        return convert(sourceSupplier.get(), targetSupplier.get());
+    }
+
 }

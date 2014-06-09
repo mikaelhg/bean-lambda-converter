@@ -12,10 +12,6 @@ public class FieldGroup<SOURCE, TARGET> extends AbstractFieldTransfer<SOURCE, TA
 
     private final Predicate<SOURCE> predicate;
 
-    private FieldGroup() {
-        this(null);
-    }
-
     protected FieldGroup(final Converter<SOURCE, TARGET> converter) {
         this(converter, null);
     }

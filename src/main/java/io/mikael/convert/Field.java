@@ -5,9 +5,9 @@ import java.util.function.Function;
 
 class Field<SOURCE, TARGET, D> extends AbstractFieldTransfer<SOURCE, TARGET> {
 
-    private final Function<SOURCE, D> in;
+    protected final Function<SOURCE, D> in;
 
-    private final BiConsumer<TARGET, D> out;
+    protected final BiConsumer<TARGET, D> out;
 
     protected Field(final Converter<SOURCE, TARGET> converter,
                  final Function<SOURCE, D> in, final BiConsumer<TARGET, D> out)

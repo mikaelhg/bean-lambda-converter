@@ -1,10 +1,10 @@
-package io.mikael.convert;
+package io.mikael.convert.bean;
 
 abstract class AbstractFieldTransfer<SOURCE, TARGET> {
 
-    protected final Converter<SOURCE, TARGET> converter;
+    protected final BeanConverter<SOURCE, TARGET> converter;
 
-    protected AbstractFieldTransfer(final Converter<SOURCE, TARGET> converter) {
+    protected AbstractFieldTransfer(final BeanConverter<SOURCE, TARGET> converter) {
         this.converter = converter;
     }
 

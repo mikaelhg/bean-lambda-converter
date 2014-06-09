@@ -1,4 +1,4 @@
-package io.mikael.convert;
+package io.mikael.convert.bean;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -10,19 +10,19 @@ import java.util.function.Supplier;
 /**
  * The primary public face of the converter prototype.
  */
-public class Converter<SOURCE, TARGET> {
+public class BeanConverter<SOURCE, TARGET> {
 
     private final List<AbstractFieldTransfer<SOURCE, TARGET>> transfers = new LinkedList<>();
 
-    public static <S, T> Converter<S, T> fromTo(final Class<S> cs, final Class<T> ct) {
-        return new Converter<>();
+    public static <S, T> BeanConverter<S, T> fromTo(final Class<S> cs, final Class<T> ct) {
+        return new BeanConverter<>();
     }
 
-    public static <S, T> Converter<S, T> fromTo() {
-        return new Converter<>();
+    public static <S, T> BeanConverter<S, T> fromTo() {
+        return new BeanConverter<>();
     }
 
-    public <D> Converter<SOURCE, TARGET> field(
+    public <D> BeanConverter<SOURCE, TARGET> field(
             final Function<SOURCE, D> in, final BiConsumer<TARGET, D> out)
     {
         transfers.add(new Field<>(this, in, out));

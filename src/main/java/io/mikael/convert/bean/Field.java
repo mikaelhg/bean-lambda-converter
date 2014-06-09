@@ -1,4 +1,4 @@
-package io.mikael.convert;
+package io.mikael.convert.bean;
 
 import java.util.function.BiConsumer;
 import java.util.function.Function;
@@ -9,7 +9,7 @@ class Field<SOURCE, TARGET, D> extends AbstractFieldTransfer<SOURCE, TARGET> {
 
     protected final BiConsumer<TARGET, D> out;
 
-    protected Field(final Converter<SOURCE, TARGET> converter,
+    protected Field(final BeanConverter<SOURCE, TARGET> converter,
                  final Function<SOURCE, D> in, final BiConsumer<TARGET, D> out)
     {
         super(converter);

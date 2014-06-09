@@ -1,4 +1,4 @@
-package io.mikael.convert;
+package io.mikael.convert.bean;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -12,16 +12,16 @@ public class FieldGroup<SOURCE, TARGET> extends AbstractFieldTransfer<SOURCE, TA
 
     protected final Predicate<SOURCE> predicate;
 
-    protected FieldGroup(final Converter<SOURCE, TARGET> converter) {
+    protected FieldGroup(final BeanConverter<SOURCE, TARGET> converter) {
         this(converter, null);
     }
 
-    protected FieldGroup(final Converter<SOURCE, TARGET> converter, final Predicate<SOURCE> predicate) {
+    protected FieldGroup(final BeanConverter<SOURCE, TARGET> converter, final Predicate<SOURCE> predicate) {
         super(converter);
         this.predicate = predicate;
     }
 
-    public Converter<SOURCE, TARGET> end() {
+    public BeanConverter<SOURCE, TARGET> end() {
         return converter;
     }
 

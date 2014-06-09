@@ -1,6 +1,6 @@
 package io.mikael.convert.basic;
 
-import io.mikael.convert.Converter;
+import io.mikael.convert.bean.BeanConverter;
 import org.junit.Test;
 
 public class BasicTests {
@@ -22,18 +22,18 @@ public class BasicTests {
 
     @Test
     public void basicTest() {
-        final Converter<Foo, Bar> c1 = Converter.<Foo, Bar>fromTo()
+        final BeanConverter<Foo, Bar> c1 = BeanConverter.<Foo, Bar>fromTo()
                 .field(Foo::getA, Bar::setB);
 
-        final Converter<Foo, Bar> c2 = Converter.fromTo(Foo.class, Bar.class)
+        final BeanConverter<Foo, Bar> c2 = BeanConverter.fromTo(Foo.class, Bar.class)
                 .field(Foo::getA, Bar::setB);
 
-        final Converter<Foo, Bar> c3 = Converter.fromTo(Foo.class, Bar.class)
+        final BeanConverter<Foo, Bar> c3 = BeanConverter.fromTo(Foo.class, Bar.class)
                 .fieldGroup()
                     .field(Foo::getA, Bar::setB)
                 .end();
 
-        final Converter<Foo, Bar> c4 = Converter.fromTo(Foo.class, Bar.class)
+        final BeanConverter<Foo, Bar> c4 = BeanConverter.fromTo(Foo.class, Bar.class)
                 .fieldGroup(f -> f.getA().equals("I AM A TEAPOT"))
                     .field(Foo::getA, Bar::setB)
                 .end();
@@ -44,13 +44,13 @@ public class BasicTests {
 
         final Foo2 foo2 = new Foo2();
 
-        final Bar bar = Converter.fromTo(Foo.class, Bar.class)
+        final Bar bar = BeanConverter.fromTo(Foo.class, Bar.class)
                 .fieldGroup(f -> f.getA().equals("I AM A TEAPOT"))
                     .field(Foo::getA, Bar::setB)
                 .end()
                 .convert(foo, new Bar());
 
-        final Bar bar2 = Converter.fromTo(Foo.class, Bar.class)
+        final Bar bar2 = BeanConverter.fromTo(Foo.class, Bar.class)
                 .fieldGroup(f -> f.getA().equals("I AM A TEAPOT"))
                     .field(Foo::getA, Bar::setB)
                 .end()

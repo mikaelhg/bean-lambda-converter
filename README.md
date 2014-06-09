@@ -19,9 +19,21 @@ final Converter<Foo, Bar> c4 = Converter.fromTo(Foo.class, Bar.class)
             .field(Foo::getA, Bar::setB)
         .end();
 
+final Foo foo = new Foo() {
+    @Override public String getA() { return "C"; }
+};
+
+final Foo2 foo2 = new Foo2();
+
 final Bar bar = Converter.fromTo(Foo.class, Bar.class)
         .fieldGroup(f -> f.getA().equals("I AM A TEAPOT"))
             .field(Foo::getA, Bar::setB)
         .end()
-        .convert(new Foo(), new Bar());
+        .convert(foo, new Bar());
+
+final Bar bar2 = Converter.fromTo(Foo.class, Bar.class)
+        .fieldGroup(f -> f.getA().equals("I AM A TEAPOT"))
+            .field(Foo::getA, Bar::setB)
+        .end()
+        .convert(foo2, Bar::new);
 ```

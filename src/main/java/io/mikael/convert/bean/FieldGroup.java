@@ -12,12 +12,14 @@ public class FieldGroup<SOURCE, TARGET> extends AbstractFieldTransfer<SOURCE, TA
 
     protected final Predicate<SOURCE> predicate;
 
+    protected final BeanConverter<SOURCE, TARGET> converter;
+
     protected FieldGroup(final BeanConverter<SOURCE, TARGET> converter) {
         this(converter, null);
     }
 
     protected FieldGroup(final BeanConverter<SOURCE, TARGET> converter, final Predicate<SOURCE> predicate) {
-        super(converter);
+        this.converter = converter;
         this.predicate = predicate;
     }
 
@@ -28,7 +30,7 @@ public class FieldGroup<SOURCE, TARGET> extends AbstractFieldTransfer<SOURCE, TA
     public <D> FieldGroup<SOURCE, TARGET> field(
             final Function<SOURCE, D> in, final BiConsumer<TARGET, D> out)
     {
-        transfers.add(new Field<>(converter, in, out));
+        transfers.add(new Field<>(in, out));
         return this;
     }
 

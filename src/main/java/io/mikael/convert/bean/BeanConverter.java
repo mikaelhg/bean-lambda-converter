@@ -80,6 +80,7 @@ public class BeanConverter<SOURCE, TARGET> {
     /**
      * Transfer data from a source bean instance retrieved from the @{code sourceSupplier}
      * to the given target bean instance, returning the target bean instance.
+     */
     public TARGET convert(final Supplier<SOURCE> sourceSupplier, final TARGET target) {
         return convert(sourceSupplier.get(), target);
     }

@@ -9,8 +9,7 @@ class Field<SOURCE, TARGET, D> extends AbstractFieldTransfer<SOURCE, TARGET> {
 
     protected final BiConsumer<TARGET, D> out;
 
-    protected Field(final Function<SOURCE, D> in, final BiConsumer<TARGET, D> out)
-    {
+    protected Field(final Function<SOURCE, D> in, final BiConsumer<TARGET, D> out) {
         this.in = in;
         this.out = out;
     }

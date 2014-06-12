@@ -6,6 +6,11 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+/**
+ * A group of field transfers, which will only be executed if the given predicate
+ * evaluates as true. Typically used to configure transfers which only make sense
+ * in certain conditions.
+ */
 public class FieldGroup<SOURCE, TARGET> extends AbstractFieldTransfer<SOURCE, TARGET> {
 
     protected final List<AbstractFieldTransfer<SOURCE, TARGET>> transfers = new LinkedList<>();
@@ -23,10 +28,17 @@ public class FieldGroup<SOURCE, TARGET> extends AbstractFieldTransfer<SOURCE, TA
         this.predicate = predicate;
     }
 
+    /**
+     * End this field group, continue the fluent expression from its parent converter.
+     */
     public BeanConverter<SOURCE, TARGET> end() {
         return converter;
     }
 
+    /**
+     * Indicate the transfer of information from a source bean method or lambda,
+     * to a target bean method or lambda.
+     */
     public <D> FieldGroup<SOURCE, TARGET> field(
             final Function<SOURCE, D> in, final BiConsumer<TARGET, D> out)
     {

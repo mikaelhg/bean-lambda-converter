@@ -18,6 +18,7 @@ public class BasicTests {
     }
 
     private TestSource testSource;
+
     private TestTarget testTarget;
 
     @Before
@@ -56,7 +57,7 @@ public class BasicTests {
     @Test
     public void basicFieldGroupNotCalled() {
         BeanConverter.fromTo(TestSource.class, TestTarget.class)
-                .fieldGroup(f -> f.getInput().equals("I AM A TEAPOT"))
+                .fieldGroup(s -> s.getInput().equals("I AM A TEAPOT"))
                     .field(TestSource::getInput, TestTarget::setOutput)
                 .end()
                 .convert(testSource, testTarget);
@@ -66,7 +67,7 @@ public class BasicTests {
     @Test
     public void basicFieldGroupCalled() {
         BeanConverter.fromTo(TestSource.class, TestTarget.class)
-                .fieldGroup(f -> f.getInput().equals("A"))
+                .fieldGroup(s -> s.getInput().equals("A"))
                     .field(TestSource::getInput, TestTarget::setOutput)
                 .end()
                 .convert(testSource, testTarget);
@@ -75,18 +76,11 @@ public class BasicTests {
 
     @Test
     public void converterSourceSignatures() {
-        final BeanConverter<TestSource, TestTarget> bc = BeanConverter.fromTo(TestSource.class, TestTarget.class);
-
-        final TestTarget b1 = bc.convert(() -> mock(TestSource.class), () -> mock(TestTarget.class));
-        assertNotNull(b1);
-
-        final TestTarget b2 = bc.convert(mock(TestSource.class), () -> mock(TestTarget.class));
-        assertNotNull(b2);
-
-        final TestTarget b3 = bc.convert(() -> mock(TestSource.class), mock(TestTarget.class));
-        assertNotNull(b3);
-
-        verifyZeroInteractions(testSource, testTarget);
+        final BeanConverter<TestSource, TestTarget> bc =
+                BeanConverter.fromTo(TestSource.class, TestTarget.class);
+        assertNotNull(bc.convert(() -> mock(TestSource.class), () -> mock(TestTarget.class)));
+        assertNotNull(bc.convert(mock(TestSource.class), () -> mock(TestTarget.class)));
+        assertNotNull(bc.convert(() -> mock(TestSource.class), mock(TestTarget.class)));
     }
 
 }

@@ -50,7 +50,7 @@ public class BeanConverter<SOURCE, TARGET> {
 
     /**
      * Indicate that the following group of transfers will only be executed,
-     * if the @{code isGroupActive} predicate returns @{code true}.
+     * if the {@code isGroupActive} predicate returns {@code true}.
      */
     public FieldGroup<SOURCE, TARGET> fieldGroup(final Predicate<SOURCE> isGroupActive) {
         final FieldGroup<SOURCE, TARGET> ret = new FieldGroup<>(this, isGroupActive);
@@ -71,14 +71,14 @@ public class BeanConverter<SOURCE, TARGET> {
 
     /**
      * Transfer data from the given source bean instance to a target bean instance
-     * retrieved from the @{code targetSupplier}, returning the target bean instance.
+     * retrieved from the {@code targetSupplier}, returning the target bean instance.
      */
     public TARGET convert(final SOURCE source, final Supplier<TARGET> targetSupplier) {
         return convert(source, targetSupplier.get());
     }
 
     /**
-     * Transfer data from a source bean instance retrieved from the @{code sourceSupplier}
+     * Transfer data from a source bean instance retrieved from the {@code sourceSupplier}
      * to the given target bean instance, returning the target bean instance.
      */
     public TARGET convert(final Supplier<SOURCE> sourceSupplier, final TARGET target) {
@@ -86,8 +86,8 @@ public class BeanConverter<SOURCE, TARGET> {
     }
 
     /**
-     * Transfer data from a source bean instance retrieved from the @{code sourceSupplier}
-     * to a target bean instance retrieved from the @{code targetSupplier},
+     * Transfer data from a source bean instance retrieved from the {@code sourceSupplier}
+     * to a target bean instance retrieved from the {@code targetSupplier},
      * returning the target bean instance.
      */
     public TARGET convert(final Supplier<SOURCE> sourceSupplier, final Supplier<TARGET> targetSupplier) {

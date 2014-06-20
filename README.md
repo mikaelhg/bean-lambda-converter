@@ -37,3 +37,12 @@ final Bar bar2 = BeanConverter.fromTo(Foo.class, Bar.class)
         .end()
         .convert(foo2, Bar::new);
 ```
+
+TODO:
+
+* Exception handling in suppliers / targets.
+
+* JSON to JSON conversion.
+
+* DTO to Entity to DTO conversion.
+

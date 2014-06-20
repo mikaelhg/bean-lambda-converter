@@ -73,16 +73,22 @@ public class BeanConverter<SOURCE, TARGET> {
      * Transfer data from the given source bean instance to a target bean instance
      * retrieved from the {@code targetSupplier}, returning the target bean instance.
      */
-    public TARGET convert(final SOURCE source, final Supplier<TARGET> targetSupplier) {
-        return convert(source, targetSupplier.get());
+    public TARGET convert(final SOURCE source,
+                          final ExceptionalSupplier<TARGET> targetSupplier)
+    {
+        final TARGET target = targetSupplier.get().get();
+        return convert(source, target);
     }
 
     /**
      * Transfer data from a source bean instance retrieved from the {@code sourceSupplier}
      * to the given target bean instance, returning the target bean instance.
      */
-    public TARGET convert(final Supplier<SOURCE> sourceSupplier, final TARGET target) {
-        return convert(sourceSupplier.get(), target);
+    public TARGET convert(final ExceptionalSupplier<SOURCE> sourceSupplier,
+                          final TARGET target)
+    {
+        final SOURCE source = sourceSupplier.get().get();
+        return convert(source, target);
     }
 
     /**
@@ -90,8 +96,12 @@ public class BeanConverter<SOURCE, TARGET> {
      * to a target bean instance retrieved from the {@code targetSupplier},
      * returning the target bean instance.
      */
-    public TARGET convert(final Supplier<SOURCE> sourceSupplier, final Supplier<TARGET> targetSupplier) {
-        return convert(sourceSupplier.get(), targetSupplier.get());
+    public TARGET convert(final ExceptionalSupplier<SOURCE> sourceSupplier,
+                          final ExceptionalSupplier<TARGET> targetSupplier)
+    {
+        final SOURCE source = sourceSupplier.get().get();
+        final TARGET target = targetSupplier.get().get();
+        return convert(source, target);
     }
 
 }

@@ -30,7 +30,7 @@ public class BasicTests {
 
     @Test
     public void fieldConversionWithGenerics() {
-        BeanConverter.<TestSource, TestTarget>fromTo()
+        BeanConverter.<TestSource, TestTarget>of()
                 .field(TestSource::getInput, TestTarget::setOutput)
                 .convert(testSource, testTarget);
         verify(testTarget).setOutput("A");
@@ -38,7 +38,7 @@ public class BasicTests {
 
     @Test
     public void fieldConversionWithClassParameters() {
-        BeanConverter.fromTo(TestSource.class, TestTarget.class)
+        BeanConverter.of(TestSource.class, TestTarget.class)
                 .field(TestSource::getInput, TestTarget::setOutput)
                 .convert(testSource, testTarget);
         verify(testTarget).setOutput("A");
@@ -46,7 +46,7 @@ public class BasicTests {
 
     @Test
     public void fieldGroupWithoutPrecondition() {
-        BeanConverter.fromTo(TestSource.class, TestTarget.class)
+        BeanConverter.of(TestSource.class, TestTarget.class)
                 .fieldGroup()
                     .field(TestSource::getInput, TestTarget::setOutput)
                 .end()
@@ -56,7 +56,7 @@ public class BasicTests {
 
     @Test
     public void basicFieldGroupNotCalled() {
-        BeanConverter.fromTo(TestSource.class, TestTarget.class)
+        BeanConverter.of(TestSource.class, TestTarget.class)
                 .fieldGroup(s -> s.getInput().equals("I AM A TEAPOT"))
                     .field(TestSource::getInput, TestTarget::setOutput)
                 .end()
@@ -66,7 +66,7 @@ public class BasicTests {
 
     @Test
     public void basicFieldGroupCalled() {
-        BeanConverter.fromTo(TestSource.class, TestTarget.class)
+        BeanConverter.of(TestSource.class, TestTarget.class)
                 .fieldGroup(s -> s.getInput().equals("A"))
                     .field(TestSource::getInput, TestTarget::setOutput)
                 .end()
@@ -77,7 +77,7 @@ public class BasicTests {
     @Test
     public void converterSourceSignatures() {
         final BeanConverter<TestSource, TestTarget> bc =
-                BeanConverter.fromTo(TestSource.class, TestTarget.class);
+                BeanConverter.of(TestSource.class, TestTarget.class);
         assertNotNull(bc.convert(() -> mock(TestSource.class), () -> mock(TestTarget.class)));
         assertNotNull(bc.convert(mock(TestSource.class), () -> mock(TestTarget.class)));
         assertNotNull(bc.convert(() -> mock(TestSource.class), mock(TestTarget.class)));

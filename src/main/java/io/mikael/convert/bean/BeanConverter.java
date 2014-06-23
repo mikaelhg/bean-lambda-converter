@@ -17,14 +17,14 @@ public class BeanConverter<SOURCE, TARGET> {
     /**
      * Construct a converter from type S to type T.
      */
-    public static <S, T> BeanConverter<S, T> fromTo(final Class<S> cs, final Class<T> ct) {
+    public static <S, T> BeanConverter<S, T> of(final Class<S> cs, final Class<T> ct) {
         return new BeanConverter<>();
     }
 
     /**
      * Construct a converter from type S to type T.
      */
-    public static <S, T> BeanConverter<S, T> fromTo() {
+    public static <S, T> BeanConverter<S, T> of() {
         return new BeanConverter<>();
     }
 

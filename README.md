@@ -14,7 +14,7 @@ final BeanConverter<Foo, Bar> c3 = BeanConverter.of(Foo.class, Bar.class)
             .field(Foo::getFirstName, Bar::setFullName)
         .end();
 
-final BeanConverter<Foo, Bar> c4 = BeanConverter.fromTo(Foo.class, Bar.class)
+final BeanConverter<Foo, Bar> c4 = BeanConverter.of(Foo.class, Bar.class)
         .fieldGroup(f -> f.getFirstName().equals("I AM A TEAPOT"))
             .field(Foo::getFirstName, Bar::setFullName)
         .end();

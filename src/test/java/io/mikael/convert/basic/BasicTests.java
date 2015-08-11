@@ -9,12 +9,12 @@ import static org.mockito.Mockito.*;
 
 public class BasicTests {
 
-    public static interface TestSource {
-        public String getInput();
+    public interface TestSource {
+        String getInput();
     }
 
-    public static interface TestTarget {
-        public void setOutput(final String output);
+    public interface TestTarget {
+        void setOutput(final String output);
     }
 
     private TestSource testSource;
@@ -76,8 +76,7 @@ public class BasicTests {
 
     @Test
     public void converterSourceSignatures() {
-        final BeanConverter<TestSource, TestTarget> bc =
-                BeanConverter.of(TestSource.class, TestTarget.class);
+        final BeanConverter<TestSource, TestTarget> bc = BeanConverter.of();
         assertNotNull(bc.convert(() -> mock(TestSource.class), () -> mock(TestTarget.class)));
         assertNotNull(bc.convert(mock(TestSource.class), () -> mock(TestTarget.class)));
         assertNotNull(bc.convert(() -> mock(TestSource.class), mock(TestTarget.class)));

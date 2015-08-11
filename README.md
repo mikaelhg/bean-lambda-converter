@@ -15,7 +15,7 @@ final BeanConverter<Foo, Bar> c3 = BeanConverter.of(Foo.class, Bar.class)
         .end();
 
 final BeanConverter<Foo, Bar> c4 = BeanConverter.of(Foo.class, Bar.class)
-        .fieldGroup(f -> f.getFirstName().equals("I AM A TEAPOT"))
+        .fieldGroupIf(f -> f.getFirstName().equals("I AM A TEAPOT"))
             .field(Foo::getFirstName, Bar::setFullName)
         .end();
 
@@ -26,13 +26,13 @@ final Foo foo = new Foo() {
 final Foo2 foo2 = new Foo2();
 
 final Bar bar = BeanConverter.of(Foo.class, Bar.class)
-        .fieldGroup(f -> f.getFirstName().equals("I AM A TEAPOT"))
+        .fieldGroupIf(f -> f.getFirstName().equals("I AM A TEAPOT"))
             .field(Foo::getFirstName, Bar::setFullName)
         .end()
         .convert(foo, new Bar());
 
 final Bar bar2 = BeanConverter.of(Foo.class, Bar.class)
-        .fieldGroup(f -> f.getFirstName().equals("I AM A TEAPOT"))
+        .fieldGroupIf(f -> f.getFirstName().equals("I AM A TEAPOT"))
             .field(Foo::getFirstName, Bar::setFullName)
         .end()
         .convert(foo2, Bar::new);

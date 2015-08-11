@@ -51,7 +51,7 @@ public class BeanConverter<SOURCE, TARGET> {
      * Indicate that the following group of transfers will only be executed,
      * if the {@code isGroupActive} predicate returns {@code true}.
      */
-    public FieldGroup<SOURCE, TARGET> fieldGroup(final Predicate<SOURCE> isGroupActive) {
+    public FieldGroup<SOURCE, TARGET> fieldGroupIf(final Predicate<SOURCE> isGroupActive) {
         final FieldGroup<SOURCE, TARGET> ret = new FieldGroup<>(this, isGroupActive);
         transfers.add(ret);
         return ret;

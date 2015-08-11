@@ -57,7 +57,7 @@ public class BasicTests {
     @Test
     public void basicFieldGroupNotCalled() {
         BeanConverter.of(TestSource.class, TestTarget.class)
-                .fieldGroup(s -> s.getInput().equals("I AM A TEAPOT"))
+                .fieldGroupIf(s -> s.getInput().equals("I AM A TEAPOT"))
                     .field(TestSource::getInput, TestTarget::setOutput)
                 .end()
                 .convert(testSource, testTarget);
@@ -67,7 +67,7 @@ public class BasicTests {
     @Test
     public void basicFieldGroupCalled() {
         BeanConverter.of(TestSource.class, TestTarget.class)
-                .fieldGroup(s -> s.getInput().equals("A"))
+                .fieldGroupIf(s -> s.getInput().equals("A"))
                     .field(TestSource::getInput, TestTarget::setOutput)
                 .end()
                 .convert(testSource, testTarget);

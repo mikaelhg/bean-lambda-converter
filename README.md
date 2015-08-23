@@ -38,6 +38,20 @@ final Bar bar2 = BeanConverter.of(Foo.class, Bar.class)
         .convert(foo2, Bar::new);
 ```
 
+Tentative design for the JSON converter:
+
+* Fluently describe both the source and target JSON structures (object, arrays, repeating elements, primitives)
+and store the descriptive structures as variables.
+
+* Create "tag" object instances to mark where a structure in the input translates into the output,
+and whether the point is to aggregate or repeat an array from the source to the target sides. Stick
+references to these instances in the structure description trees.
+
+* Later: HTTP GET and combine results from multiple sources.
+
+* Fluent building of graceful degradation scenarios, how long to wait for different sources,
+and how to react if one or more sources fail to respond in a set time.
+
 TODO:
 
 * Exception handling in suppliers / targets.

@@ -1,10 +1,10 @@
 package io.mikael.convert.basic;
 
 import io.mikael.convert.bean.BeanConverter;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 public class BasicTests {
@@ -17,16 +17,52 @@ public class BasicTests {
         void setOutput(final String output);
     }
 
+    public interface TestInner1 {
+        String getCat();
+        String getDog();
+    }
+
+    public interface TestInner2 {
+        void setLion(final String lion);
+        void setShibaInu(final String shibaInu);
+    }
+
+    public interface TestSourceWithInner {
+        String getInput();
+        TestInner1 getInner1();
+    }
+
+    public interface TestTargetWithInner {
+        void setOutput(final String output);
+        TestInner2 getInner2();
+    }
+
     private TestSource testSource;
 
     private TestTarget testTarget;
 
-    @Before
+    private TestSourceWithInner testSourceWithInner;
+
+    private TestTargetWithInner testTargetWithInner;
+
+    @BeforeEach
     public void before() {
         testSource = mock(TestSource.class);
         testTarget = mock(TestTarget.class);
+        testSourceWithInner = mock(TestSourceWithInner.class);
+        testTargetWithInner = mock(TestTargetWithInner.class);
         when(testSource.getInput()).thenReturn("A");
     }
+
+    /*
+    @Test
+    public void innerFields() {
+        BeanConverter.of(TestSourceWithInner.class, TestTargetWithInner.class)
+                .inner(TestSourceWithInner::getInner1, TestTargetWithInner::getInner2)
+                .end()
+                .convert(testSourceWithInner, testTargetWithInner);
+    }
+    */
 
     @Test
     public void fieldConversionWithGenerics() {

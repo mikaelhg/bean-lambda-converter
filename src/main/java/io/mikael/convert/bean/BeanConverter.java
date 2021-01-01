@@ -3,6 +3,7 @@ package io.mikael.convert.bean;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -39,10 +40,22 @@ public class BeanConverter<SOURCE, TARGET> {
     }
 
     /**
+     * Indicate the transfer of information from a source bean method or lambda,
+     * to a target bean method or lambda.
+     */
+    public <D> BeanConverter<SOURCE, TARGET> field(
+            final Function<SOURCE, D> in, final BiConsumer<TARGET, D> out,
+            final Consumer<Exception> exceptionHandler)
+    {
+        transfers.add(new Field<>(in, out));
+        return this;
+    }
+
+    /**
      * Indicate that the following field transfers form a group.
      */
     public FieldGroup<SOURCE, TARGET> fieldGroup() {
-        final FieldGroup<SOURCE, TARGET> ret = new FieldGroup<>(this);
+        final var ret = new FieldGroup<>(this);
         transfers.add(ret);
         return ret;
     }
@@ -52,7 +65,7 @@ public class BeanConverter<SOURCE, TARGET> {
      * if the {@code isGroupActive} predicate returns {@code true}.
      */
     public FieldGroup<SOURCE, TARGET> fieldGroupIf(final Predicate<SOURCE> isGroupActive) {
-        final FieldGroup<SOURCE, TARGET> ret = new FieldGroup<>(this, isGroupActive);
+        final var ret = new FieldGroup<>(this, isGroupActive);
         transfers.add(ret);
         return ret;
     }
@@ -86,7 +99,7 @@ public class BeanConverter<SOURCE, TARGET> {
     public TARGET convert(final ExceptionalSupplier<SOURCE> sourceSupplier,
                           final TARGET target)
     {
-        final SOURCE source = sourceSupplier.get().get();
+        final var source = sourceSupplier.get().get();
         return convert(source, target);
     }
 
@@ -98,8 +111,8 @@ public class BeanConverter<SOURCE, TARGET> {
     public TARGET convert(final ExceptionalSupplier<SOURCE> sourceSupplier,
                           final ExceptionalSupplier<TARGET> targetSupplier)
     {
-        final SOURCE source = sourceSupplier.get().get();
-        final TARGET target = targetSupplier.get().get();
+        final var source = sourceSupplier.get().get();
+        final var target = targetSupplier.get().get();
         return convert(source, target);
     }
 
